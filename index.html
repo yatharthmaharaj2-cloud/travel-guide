@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Incredible India | Travel Guide</title>
+
+<style>
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050816;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================
+   STAR BACKGROUND
+========================= */
+
+.stars,
+.stars::before,
+.stars::after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: -2;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#ffd166 1px, transparent 1px);
+    background-size: 80px 80px, 130px 130px;
+    background-position: 10px 20px, 50px 80px;
+    opacity: 0.35;
+    animation: starMove 30s linear infinite;
+}
+
+.stars::before {
+    opacity: 0.2;
+    transform: scale(1.5);
+}
+
+.stars::after {
+    opacity: 0.15;
+    transform: scale(2);
+}
+
+@keyframes starMove {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(80px);
+    }
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 8, 22, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff9933;
+}
+
+.logo span {
+    color: #fff;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff9933;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 950px;
+}
+
+.flag {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1;
+    font-weight: 900;
+    background: linear-gradient(
+        90deg,
+        #ff9933,
+        #ffffff,
+        #138808
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(255,153,51,0.2);
+}
+
+.hero h2 {
+    margin-top: 20px;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: #ffd166;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: 25px auto;
+    color: #cbd5e1;
+    font-size: 1.1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 28px;
+    margin-top: 15px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff9933, #ff5e00);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 25px rgba(255,153,51,0.3);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 0 35px rgba(255,153,51,0.6);
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+section {
+    padding: 90px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    color: #ffd166;
+}
+
+.section-title p {
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+    max-width: 950px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    padding: 35px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+
+.intro p {
+    color: #dbe4ef;
+}
+
+/* =========================
+   DESTINATION CARDS
+========================= */
+
+.controls {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.filter-btn {
+    padding: 9px 18px;
+    margin: 5px;
+    border: 1px solid #ff9933;
+    border-radius: 25px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #ff9933;
+    color: #111;
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.4s;
+    backdrop-filter: blur(8px);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #ff9933;
+    box-shadow: 0 15px 40px rgba(255,153,51,0.18);
+}
+
+.card-image {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: linear-gradient(
+        135deg,
+        #172554,
+        #0f766e
+    );
+}
+
+.card:nth-child(2) .card-image {
+    background: linear-gradient(135deg,#7c2d12,#f59e0b);
+}
+
+.card:nth-child(3) .card-image {
+    background: linear-gradient(135deg,#064e3b,#166534);
+}
+
+.card:nth-child(4) .card-image {
+    background: linear-gradient(135deg,#312e81,#7c3aed);
+}
+
+.card:nth-child(5) .card-image {
+    background: linear-gradient(135deg,#0c4a6e,#0284c7);
+}
+
+.card:nth-child(6) .card-image {
+    background: linear-gradient(135deg,#701a75,#db2777);
+}
+
+.card-content {
+    padding: 22px;
+}
+
+.card-content h3 {
+    color: #ffd166;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    color: #b8c4d4;
+}
+
+.tag {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    background: rgba(255,153,51,0.15);
+    color: #ffb35c;
+}
+
+/* =========================
+   EXPERIENCE SECTION
+========================= */
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+}
+
+.experience {
+    padding: 30px;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+}
+
+.experience:hover {
+    transform: scale(1.04);
+    background: rgba(255,153,51,0.08);
+}
+
+.experience .icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.experience h3 {
+    color: #ffd166;
+    margin-bottom: 8px;
+}
+
+.experience p {
+    color: #aebbd0;
+}
+
+/* =========================
+   FOOD
+========================= */
+
+.food {
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(255,153,51,0.04),
+        transparent
+    );
+}
+
+.food-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+}
+
+.food-item {
+    padding: 25px;
+    border-radius: 18px;
+    background: #0b1224;
+    border: 1px solid #1e293b;
+    text-align: center;
+}
+
+.food-item h3 {
+    color: #ff9933;
+    margin: 10px 0;
+}
+
+.food-item p {
+    color: #9ca9ba;
+}
+
+/* =========================
+   TRAVEL TIPS
+========================= */
+
+.tips {
+    max-width: 900px;
+    margin: auto;
+}
+
+.tip {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    border-left: 4px solid #ff9933;
+}
+
+.tip-icon {
+    font-size: 1.8rem;
+}
+
+/* =========================
+   ITINERARY
+========================= */
+
+.timeline {
+    max-width: 850px;
+    margin: auto;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(#ff9933,#138808);
+}
+
+.day {
+    position: relative;
+    padding: 20px 20px 20px 65px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+}
+
+.day::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: #ff9933;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ff9933;
+}
+
+.day h3 {
+    color: #ffd166;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 45px 20px;
+    background: #02040c;
+    border-top: 1px solid #1e293b;
+}
+
+footer h2 {
+    color: #ff9933;
+}
+
+footer p {
+    margin-top: 10px;
+    color: #78869a;
+}
+
+footer a {
+    color: #ffd166;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px) {
+
+    nav {
+        padding: 12px 5%;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 70px 5%;
+    }
+
+    .hero {
+        padding-top: 110px;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+    <div class="logo">🇮🇳 Incredible<span>India</span></div>
+
+```
+<ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#destinations">Places</a></li>
+    <li><a href="#culture">Culture</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#tips">Tips</a></li>
+</ul>
+```
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+```
+<div class="hero-content">
+
+    <div class="flag">🇮🇳</div>
+
+    <h1>INCREDIBLE<br>INDIA</h1>
+
+    <h2>Travel • Explore • Experience</h2>
+
+    <p>
+        From the snow-covered Himalayas to tropical beaches,
+        ancient forts, colorful festivals and unforgettable food,
+        India is a vibrant nation of ancient traditions and modern growth.
+    </p>
+
+    <a href="#destinations" class="btn">
+        ✈ Explore India
+    </a>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     INTRODUCTION
+========================= -->
+
+<section>
+
+```
+<div class="section-title">
+    <h2>🌏 Welcome to India!</h2>
+    <p>A land of incredible diversity</p>
+</div>
+
+<div class="intro">
+
+    <p>
+        India is a vast and culturally diverse country where ancient
+        traditions meet modern cities. Travelers can explore Himalayan
+        landscapes, deserts, beaches, forests, historic and ancient monuments,
+        spiritual centers and vibrant markets.
+    </p>
+
+    <br>
+
+    <p>
+        Every region has its own food, languages, architecture,
+        festivals and traditions. Whether you are interested in
+        history, nature, adventure, spirituality or cuisine,
+        India offers a wonderful experience for every kind of traveler.
+    </p>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     DESTINATIONS
+========================= -->
+
+<section id="destinations">
+
+```
+<div class="section-title">
+    <h2>📍 Must-Visit Destinations</h2>
+    <p>What's your favourite?</p>
+</div>
+
+<div class="controls">
+
+    <button class="filter-btn active" onclick="filterCards('all')">
+        All
+    </button>
+
+    <button class="filter-btn" onclick="filterCards('north')">
+        North
+    </button>
+
+    <button class="filter-btn" onclick="filterCards('west')">
+        West
+    </button>
+
+    <button class="filter-btn" onclick="filterCards('south')">
+        South
+    </button>
+
+    <button class="filter-btn" onclick="filterCards('east')">
+        East
+    </button>
+
+</div>
+
+
+<div class="destination-grid">
+
+    <div class="card north">
+        <div class="card-image">🏛️</div>
+
+        <div class="card-content">
+            <h3>Agra</h3>
+
+            <p>
+                Home of the magnificent Taj Mahal, Agra is one of
+                India's most famous heritage destinations. Explore
+                the Taj Mahal, Agra Fort and the city's ancient Mughal history.
+            </p>
+
+            <span class="tag">INDIA'S HERITAGE</span>
+        </div>
+    </div>
+
+
+    <div class="card north">
+        <div class="card-image">🏰</div>
+
+        <div class="card-content">
+            <h3>Jaipur</h3>
+
+            <p>
+                Known as the Pink City, Jaipur is famous for it's
+                grand palaces, forts, colorful bazaars and
+                Rajasthan's rich royal heritage.
+            </p>
+
+            <span class="tag">ROYAL INDIA</span>
+        </div>
+    </div>
+
+
+    <div class="card west">
+        <div class="card-image">🌊</div>
+
+        <div class="card-content">
+            <h3>Goa</h3>
+
+            <p>
+                Goa combines beaches, Portuguese-influenced
+                heritage, seafood, nightlife and a relaxed soothing
+                coastal atmosphere.
+            </p>
+
+            <span class="tag">BEAUTY</span>
+        </div>
+    </div>
+
+
+    <div class="card south">
+        <div class="card-image">🌴</div>
+
+        <div class="card-content">
+            <h3>Kerala</h3>
+
+            <p>
+                Kerala is known for lush landscapes, backwaters,
+                beaches, traditional cuisine, and rich cultural heritage often promoted as "God's Own Country."
+            </p>
+
+            <span class="tag">NATURE</span>
+        </div>
+    </div>
+
+
+    <div class="card north">
+        <div class="card-image">🏔️</div>
+
+        <div class="card-content">
+            <h3>Ladakh</h3>
+
+            <p>
+                A high-altitude Himalayan region famous for dramatic
+                mountains, monasteries, clear skies, adventure and beauty.
+            </p>
+
+            <span class="tag">ADVENTURE</span>
+        </div>
+    </div>
+
+
+    <div class="card east">
+        <div class="card-image">🍵</div>
+
+        <div class="card-content">
+            <h3>Darjeeling</h3>
+
+            <p>
+                Famous for Himalayan views, tea gardens and the
+                Darjeeling Himalayan Ropeway, Darjeeling offers
+                a beautiful mountain escape.
+            </p>
+
+            <span class="tag">MOUNTAINS</span>
+        </div>
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     EXPERIENCES
+========================= -->
+
+<section id="culture">
+
+```
+<div class="section-title">
+    <h2>✨ Experiences You Shouldn't Miss</h2>
+    <p>What do you like?</p>
+</div>
+
+<div class="experience-grid">
+
+    <div class="experience">
+        <div class="icon">🕌</div>
+        <h3>Heritage</h3>
+        <p>
+            Discover ancient forts, palaces, temples, mosques,
+            museums and historic cities.
+        </p>
+    </div>
+
+    <div class="experience">
+        <div class="icon">🪔</div>
+        <h3>Festivals</h3>
+        <p>
+            Experience India's colorful culture,
+            music, dance and traditions.
+        </p>
+    </div>
+
+    <div class="experience">
+        <div class="icon">🐅</div>
+        <h3>Wildlife</h3>
+        <p>
+            Explore national parks and wildlife reserves
+            with opportunities to see India's diverse and breath-taking fauna.
+        </p>
+    </div>
+
+    <div class="experience">
+        <div class="icon">🏄</div>
+        <h3>Adventure</h3>
+        <p>
+            Try trekking, rafting, skiing, diving,
+            paragliding and other outdoor activities.
+        </p>
+    </div>
+
+    <div class="experience">
+        <div class="icon">🧘</div>
+        <h3>Wellness</h3>
+        <p>
+            Explore yoga, meditation and traditional
+            wellness experiences.
+        </p>
+    </div>
+
+    <div class="experience">
+        <div class="icon">🎨</div>
+        <h3>Arts & Crafts</h3>
+        <p>
+            Discover India's colourful textiles, painting, designs, music,
+            dance and traditional crafts.
+        </p>
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     FOOD
+========================= -->
+
+<section class="food" id="food">
+
+```
+<div class="section-title">
+    <h2>🍛 Taste of India</h2>
+    <p>Each region has its own unique and exciting flavor</p>
+</div>
+
+<div class="food-list">
+
+    <div class="food-item">
+        <div style="font-size:3rem;">🍚</div>
+        <h3>Biryani</h3>
+        <p>
+            Aromatic rice cooked with spices and vegetables
+            or meat. Different regions have their own styles.
+        </p>
+    </div>
+
+    <div class="food-item">
+        <div style="font-size:3rem;">🥞</div>
+        <h3>Dosa</h3>
+        <p>
+            A crispy South Indian crepe traditionally served
+            with tasty sambar and chutneys.
+        </p>
+    </div>
+
+    <div class="food-item">
+        <div style="font-size:3rem;">🥘</div>
+        <h3>Rajasthani Thali</h3>
+        <p>
+            A colorful meal featuring a variety of
+            curries, breads, rice and sweets served on a plate.
+        </p>
+    </div>
+
+    <div class="food-item">
+        <div style="font-size:3rem;">🥟</div>
+        <h3>Momos</h3>
+        <p>
+            Popular dumplings enjoyed particularly across
+            Himalayan and northeastern regions.
+        </p>
+    </div>
+
+    <div class="food-item">
+        <div style="font-size:3rem;">🍮</div>
+        <h3>Gulab Jamun</h3>
+        <p>
+            Soft milk-based sweets soaked in
+            a fragrant  orange sugar syrup.
+        </p>
+    </div>
+
+    <div class="food-item">
+        <div style="font-size:3rem;">🫖</div>
+        <h3>Masala Chai</h3>
+        <p>
+            Spiced tea prepared with milk and aromatic
+            ingredients that defines daily life across India.
+        </p>
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     SAMPLE ITINERARY
+========================= -->
+
+<section>
+
+```
+<div class="section-title">
+    <h2>🗺️ A 7-Day Journey</h2>
+    <p>A Classic Example of a Unique Travel Guide</p>
+</div>
+
+<div class="timeline">
+
+    <div class="day">
+        <h3>Day 1 — Delhi 🇮🇳</h3>
+        <p>
+            Explore the history of Delhi, including famous landmarks such as
+            India Gate, Red Fort and Qutub Minar.
+        </p>
+    </div>
+
+    <div class="day">
+        <h3>Day 2 — Delhi</h3>
+        <p>
+            Discover Old Delhi, markets, museums and try local food.
+        </p>
+    </div>
+
+    <div class="day">
+        <h3>Day 3 — Agra 🕌</h3>
+        <p>
+            Explore famous heritage places such as the Taj Mahal and Agra Fort.
+        </p>
+    </div>
+
+    <div class="day">
+        <h3>Day 4 — Jaipur 🏰</h3>
+        <p>
+            Explore the Pink City's
+            markets and historic architecture.
+        </p>
+    </div>
+
+    <div class="day">
+        <h3>Day 5 — Jaipur</h3>
+        <p>
+            Visit Amber Fort, City Palace and other major
+            attractions around Jaipur.
+        </p>
+    </div>
+
+    <div class="day">
+        <h3>Day 6 — Jaipur → Delhi</h3>
+        <p>
+            Enjoy some final sightseeing places and return toward Delhi.
+        </p>
+    </div>
+
+    <div class="day">
+        <h3>Day 7 — Departure ✈️</h3>
+        <p>
+            Enjoy a final tasty Indian breakfast and begin your journey home.
+        </p>
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     TRAVEL TIPS
+========================= -->
+
+<section id="tips">
+
+```
+<div class="section-title">
+    <h2>🎒 Travel Tips</h2>
+    <p>Some things to know before you go</p>
+</div>
+
+<div class="tips">
+
+    <div class="tip">
+        <div class="tip-icon">📅</div>
+        <div>
+            <h3>Plan around the weather</h3>
+            <p>
+                India has a variety of changing climates. Research the
+                season and local conditions for each destination
+                before planning your trip.
+            </p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <div class="tip-icon">💳</div>
+        <div>
+            <h3>Carry payment options</h3>
+            <p>
+                Keep a combination of cards and some local currency.
+                Payment methods can vary between cities and smaller
+                destinations.
+            </p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <div class="tip-icon">🙏</div>
+        <div>
+            <h3>Respect local customs</h3>
+            <p>
+                Dress appropriately when visiting religious places,
+                follow local rules and ask before photographing people.
+            </p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <div class="tip-icon">📱</div>
+        <div>
+            <h3>Stay connected</h3>
+            <p>
+                Keep your phone charged and save important addresses,
+                tickets and emergency information offline to avoid any problems.
+            </p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <div class="tip-icon">🛂</div>
+        <div>
+            <h3>Check visa requirements</h3>
+            <p>
+                International visitors should always check the latest
+                visa and immigration requirements before traveling.
+            </p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <div class="tip-icon">🚨</div>
+        <div>
+            <h3>Know emergency numbers</h3>
+            <p>
+                India's national emergency number is 112.
+                The official tourist helpline is 1363.
+            </p>
+        </div>
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     FINAL CTA
+========================= -->
+
+<section>
+
+```
+<div class="intro">
+
+    <div style="font-size:4rem;">🌅</div>
+
+    <h2 style="color:#ffd166; font-size:2rem;">
+        India Waits for You!🙏
+    </h2>
+
+    <p style="margin-top:15px;">
+        Pack your bags, bring your curiosity and get ready
+        to discover a country where every destination has
+        a unique story to tell.Have Fun!
+    </p>
+
+    <a
+        class="btn"
+        href="https://www.incredibleindia.gov.in/en"
+        target="_blank"
+    >
+        Explore The Official Tourism Website →
+    </a>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+```
+<h2>🇮🇳 Incredible India</h2>
+
+<p>
+    A student-made travel guide featuring India's unique
+    culture, destinations, traditions, food and exciting experiences!
+</p>
+
+<p>
+    © 2026 Incredible India Travel Guide
+</p>
+```
+
+</footer>
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function filterCards(category) {
+
+    const cards = document.querySelectorAll(".card");
+    const buttons = document.querySelectorAll(".filter-btn");
+
+    buttons.forEach(button => {
+        button.classList.remove("active");
+    });
+
+    event.target.classList.add("active");
+
+    cards.forEach(card => {
+
+        if (category === "all") {
+            card.style.display = "block";
+        }
+
+        else if (card.classList.contains(category)) {
+            card.style.display = "block";
+        }
+
+        else {
+            card.style.display = "none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
